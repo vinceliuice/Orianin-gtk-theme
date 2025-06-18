@@ -1,0 +1,261 @@
+// based css:
+// https://github.com/shimmerproject/Greybird/blob/master/gtk-3.0/_xfce.scss
+
+/**************
+ * Xfce4 Apps *
+ **************/
+.XfceHeading {
+  background-color: $base;
+}
+
+
+/***************
+ * xfce4-panel *
+ ***************/
+.xfce4-panel.background {
+  border: none; // Sadly the border is hard-coded
+  border-color: transparent;
+  background-color: $panel;
+  color: on($panel, secondary);
+  font-weight: 500;
+
+  button, button.flat {
+    @extend %button-flat;
+    @extend %button-on-dark;
+    color: on($panel, secondary);
+
+    min-height: 16px;
+    min-width: 16px;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .tasklist button {
+    color: on($panel, secondary);
+    border-image: image(transparent) 0 0 2 / 0 0 2px;
+
+    &:checked { border-image: image($primary) 0 0 2 / 0 0 2px; }
+
+    image { padding: 4px; }
+  }
+
+  // &.horizontal .tasklist button { margin: 0 1px; }
+
+  // &.vertical .tasklist button { margin: 1px 0; }
+}
+
+// Workspace switcher provided by libwnck
+wnck-pager {
+  &:hover { background-color: $overlay-hover; }
+
+  &:active { background-color: $overlay-active; }
+
+  &:selected { background-color: $primary; }
+}
+
+XfdesktopIconView.view {
+  border-radius: $menuitem-radius;
+  background-color: transparent;
+  color: on(dark);
+  text-shadow: $text-shadow;
+
+  // XfdesktopIconView uses :active instead of :selected for selection
+  &:active, &:selected, &:checked {
+    @extend %selected_items_primary;
+
+    box-shadow: none;
+  }
+
+  // .label { text-shadow: $text-shadow; }
+
+  .rubberband {
+    @extend rubberband;
+
+    border-radius: 0;
+  }
+}
+
+#XfceNotifyWindow {
+  buttonbox { padding: 0; }
+
+  // button { }
+
+  label#summary { font-weight: bold; }
+
+  // progressbar {
+  //   progress { }
+  //
+  //   trough { }
+  // }
+}
+
+// Xfwm4's alt-tab dialog, aka "tabwin"
+#xfwm-tabwin {
+  padding: 12px;
+  border-radius: $corner-radius;
+
+  // Set the application icon- and preview-size to 64px
+  -XfwmTabwinWidget-icon-size: 64px;
+  -XfwmTabwinWidget-preview-size: 64px;
+}
+
+/***************
+ * Whiskermenu *
+ ***************/
+
+window#whiskermenu-window {
+  border-radius: 0;
+  background-color: $popover;
+  border: none;
+
+  entry.search {
+    border-radius: $menuitem-radius;
+
+    &:focus { background-color: $base; }
+  }
+
+  // Need to set Whisker menu background opacity less than 100
+  > frame > border {
+    border-radius: $window-radius;
+    padding: $space-size $space-size + 2px $space-size $space-size * 1.5;
+    margin: $space-size;
+    border: none;
+    background-color: if($opacity == 'solid', $popover, rgba($popover, 0.97));
+    box-shadow: $shadow-z4, inset 0 1px highlight($popover);
+  }
+
+  box.categories > button.radio { // sidebar categories button
+    padding: $space-size / 2 $space-size;
+    margin: 1px 0;
+    border-radius: $menuitem-radius;
+
+    &:hover { background-color: $divider; }
+
+    &:checked, &:active {
+      background-color: $track;
+      color: $text;
+
+      &:hover { background-image: none; }
+    }
+  }
+
+  scrolledwindow.frame { // App list (tree)
+    padding: $space-size / 2;
+    background-color: $base;
+    border-radius: $menuitem-radius;
+
+    treeview.view {
+      border-radius: $menuitem-radius;
+
+      &:not(:hover):not(:selected) { background: none; }
+
+      &:selected:hover {
+        background-color: $divider;
+        color: $text;
+      }
+    }
+
+    iconview {
+      border-radius: $menuitem-radius;
+    }
+  }
+
+  scrollbar {
+    border: none;
+
+    &, &.overlay-indicator {
+      &,
+      &.dragging,
+      &.hovering { background-color: transparent; }
+    }
+  }
+
+  .title-area > .commands-area > button.flat.command-button { // Bottom command buttons
+    border-radius: $menuitem-radius;
+
+    &:checked, &:active {
+      background-color: $track;
+      color: $text;
+    }
+  }
+}
+
+
+/**********
+ * Thunar *
+ **********/
+.thunar {
+  toolbar { border-bottom: 1px solid $divider; }
+
+  .standard-view.frame {
+    border: none;
+
+    > .view {
+      border-radius: $corner-radius;
+    }
+  }
+
+  .sidebar {
+    border: none;
+
+    .view:not(:selected) { background-color: transparent; }
+  }
+
+  statusbar {
+    margin: 0 -10px;
+    padding: 0 $space-size;
+    border-top: 1px solid $divider;
+  }
+
+  > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
+    border-top: none;
+  }
+}
+
+window.background.csd.thunar {
+  > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
+    border-bottom-left-radius: $window-radius;
+
+    treeview.view:not(:hover):not(:active):not(:selected) {
+      background-color: transparent;
+    }
+  }
+}
+
+
+/***************
+ * xfsm dialog *
+ ***************/
+
+dialog.xfsm-logout-dialog {
+  box-shadow: none;
+  border: none;
+  border-radius: $window-radius;
+  background-color: if($opacity == 'solid', $popover, rgba($popover, 0.97));
+}
+
+
+/**********************
+ * Xfce Notify Window *
+ **********************/
+
+#XfceNotifyWindow {
+  box-shadow: none;
+  border: none;
+  border-radius: $window-radius;
+  color: on(dark, secondary);
+  background-color: rgba(black, 0.75);
+  padding: $space-size;
+
+  buttonbox { padding: 0; }
+
+  button { @extend %button-on-dark; }
+
+  label#summary { font-weight: bold; }
+
+  // progressbar {
+  //   progress { }
+
+  //   trough { }
+  // }
+}

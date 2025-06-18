@@ -1,0 +1,192 @@
+/* Popovers/Menus */
+
+//.the popover itself
+.popup-menu-boxpointer {
+  -arrow-rise: $space-size; // distance from the panel & screen edge
+  background: none; // needs to reset?
+}
+
+// container of the popover menu
+.popup-menu {
+  min-width: if($compact == 'true', 10em, 12em);
+  color: $text;
+
+  .popup-menu-content {
+    padding: $space-size;
+    margin: 0 3px 14px;
+    background-color: if($opacity == 'solid', $popover, rgba($popover, 0.97));
+    border-radius: $popup-radius;
+    border: none;
+    box-shadow: $shell-shadow-z3;
+  }
+
+  $submenu_item_radius: $popup-radius - $space-size;
+
+  // menu items
+  .popup-menu-item {
+    spacing: $space-size;
+    padding: $space-size $space-size * 2;
+    color: $text !important;
+    background-color: transparent;
+    transition-duration: $shorter-duration;
+    border-radius: $submenu_item_radius;
+    background-image: none;
+    border: none;
+
+    &:checked {
+      font-weight: normal;
+      border-radius: $submenu_item_radius $submenu_item_radius 0 0;
+      border: none;
+      box-shadow: none;
+      color: $text-secondary !important;
+      background-color: $fill !important;
+
+      &:hover, &:focus, &.selected {
+        color: $text !important;
+        background-color: $secondary-fill !important;
+      }
+
+      &:active {
+        color: $text !important;
+        background-color: $divider !important;
+      }
+
+      &.selected:active {
+        color: $text !important;
+        background-color: darken(rgba($primary, 0.2), 10%) !important;
+      }
+
+      &:insensitive {
+        color: $text-secondary-disabled !important;
+      }
+    }
+
+    &:hover, &:focus, &.selected {
+      background-color: $secondary-fill !important;
+      color: $text !important;
+      transition-duration: 0ms;
+    }
+
+    &:active {
+      background-color: $track !important;
+      color: $text !important;
+      transition-duration: $longer-duration;
+    }
+
+    &.selected:active { color: $text !important; }
+    &:insensitive { color: $text-disabled !important; }
+
+    // add margin to switches in menu items
+    .toggle-switch {
+      &:ltr { margin-left: $margin-size; }
+      &:rtl { margin-right: $margin-size; }
+    }
+  }
+
+  .popup-ornamented-menu-item {
+    &:ltr { padding-left: $space-size; }
+    &:rtl { padding-right: $space-size; }
+  }
+
+  // all icons and other graphical elements
+  .popup-inactive-menu-item {
+    color: $text !important;
+
+    &:insensitive { color: $text-disabled !important; }
+  }
+
+  // symbolic icons in popover
+  .popup-menu-arrow,
+  .popup-menu-icon { icon-size: $base-icon-size; }
+
+  // popover submenus
+  .popup-sub-menu {
+    margin: 0;
+    border-radius: 0 0 $submenu_item_radius $submenu_item_radius;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    color: $text !important;
+    background-color: $fill !important;
+
+    .popup-menu-item {
+      margin: 0;
+      border-radius: $submenu_item_radius;
+      background-image: none;
+      color: $text !important;
+
+      &:hover, &:focus, &.selected {
+        color: $text !important;
+        background-color: $secondary-fill !important;
+      }
+
+      &:active {
+        color: $text !important;
+        background-color: $divider !important;
+      }
+
+      &.selected:active {
+        color: $text-secondary !important;
+      }
+
+      &:insensitive {
+        color: $text-secondary-disabled !important;
+      }
+    }
+  }
+
+  // container for radio and check boxes
+  .popup-menu-ornament {
+    icon-size: $scalable-icon-size !important;
+    width: $scalable-icon-size;
+  }
+
+  // separator
+  .popup-separator-menu-item {
+    // menu separator color
+    background: none;
+    border: none;
+
+    .popup-separator-menu-item-separator {
+      height: 1px; // increase visibility with a themed menu
+      background-color: $border;
+    }
+
+    .popup-sub-menu & { //submenu separators
+      background-color: transparent;
+
+      // account for ornament
+      &:ltr { margin-right: 2.5em; margin-left: 1.5em; }
+      &:rtl { margin-left: 2.5em; margin-right: 1.5em; }
+
+      .popup-separator-menu-item-separator {
+        background-color: $border;
+      }
+    }
+  }
+
+  &.panel-menu {
+    margin-bottom: 1.75em;
+  }
+}
+
+// desktop background menu
+.background-menu {
+  -boxpointer-gap: 0px;
+  -arrow-rise: 0px; // hide the beak on the menu
+}
+
+// right-click (and panel) app menu
+.app-menu {
+  max-width: 27.25em;
+
+  .popup-inactive-menu-item:first-child {
+    // "Open Windows" label
+    > StLabel {
+      @extend %caption_heading;
+
+      &:ltr { margin-right: $margin-size * 2; }
+      &:rtl { margin-left: $margin-size * 2; }
+    }
+  }
+}

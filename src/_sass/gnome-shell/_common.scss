@@ -1,0 +1,126 @@
+//This is the RIGHT PLACE to edit the stylesheet
+
+//let's start by telling people not to edit the generated CSS:
+$cakeisalie: "This stylesheet is generated, DO NOT EDIT";
+/* #{$cakeisalie} */
+
+stage {
+  @include font(body-1);
+  color: $text;
+}
+
+%status_text {
+  @include font(display-2);
+  color: on(dark, disabled);
+}
+
+$bubble_button_radius: if($corner_style == 'circular', $circular-radius, $material-radius);
+
+%bubble_button {
+  border: none;
+  margin: 0;
+  @include button(normal);
+  @include font(button);
+
+  &:hover { @include button(hover); }
+  &:active { @include button(active); color: $text !important; }
+  &:insensitive { @include button(insensitive); }
+  &:focus { @include button(focus); }
+
+  &:first-child {
+    border-radius: $bubble_button_radius 0 0 $bubble_button_radius;
+  }
+
+  &:last-child {
+    border-right-width: 0;
+    border-radius: 0 $bubble_button_radius $bubble_button_radius 0;
+  }
+
+  &:first-child:last-child {
+    border-right-width: 0;
+    border-radius: $bubble_button_radius;
+  }
+}
+
+%dialog_button {
+  border: none;
+  margin: 0;
+  border-radius: $bubble_button_radius;
+  @include button(normal);
+  @include font(button);
+
+  &:hover { @include button(hover); }
+  &:active { @include button(active); color: $text !important; }
+  &:insensitive { @include button(insensitive); }
+  &:focus { @include button(focus); }
+}
+
+%osd_button {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+
+  &:insensitive { @include button(insensitive, $c:$system, $tc: on(dark, secondary-disabled)); }
+  &:focus { @include button(focus, $c:$system, $tc: on(dark)); }
+  &:hover { @include button(hover, $c:$system, $tc: on(dark)); }
+  &:active { @include button(active, $c:$system, $tc: on(dark)); }
+  &:outlined, &:checked { @include button(checked); }
+}
+
+%osd_panel {
+  color: on($popover);
+  background-color: $popover;
+  border: none;
+  box-shadow: $shell-shadow-z4;
+  padding: $space-size * 2;
+}
+
+/* General Typography */
+
+%large_title {
+  font-weight: 300;
+  @include fontsize(24);
+}
+
+%title_1 {
+  font-weight: 800;
+  @include fontsize(20);
+}
+
+%title_2 {
+  font-weight: 800;
+  @include fontsize(15);
+}
+
+%title_3 {
+  font-weight: 700;
+  @include fontsize(15);
+}
+
+%title_4 {
+  font-weight: 700;
+  @include fontsize(13);
+}
+
+%heading {
+  font-weight: 700;
+  @include fontsize(11);
+}
+
+%caption_heading {
+  font-weight: 700;
+  @include fontsize(9);
+}
+
+%caption {
+  font-weight: 400;
+  @include fontsize(9);
+}
+
+%smaller {
+  font-weight: 400;
+  @include fontsize(8);
+}
+
+%monospace {font-family: monospace;}
+%numeric { font-feature-settings: "tnum";}

@@ -1,0 +1,33 @@
+// Theme ColorScheme palette: default/nord/dracula
+@import 'color-palette-default';
+
+$colorscheme: 'default';
+
+// Gnome-shell Activities style
+$activities: 'normal';
+
+// transparent opacity
+$opacity: 'default';
+
+// blackness
+$blackness: 'false';
+
+// Theme primary color
+$theme: 'default';
+
+// Check and radio primary color
+$check_radio: 'default';
+
+// Windows button style
+$mac_style: 'false';
+
+// Default corner radius value
+$default_corner: 12px;
+
+$corner_style: 'default';
+
+@if ($default_corner / 1px >= 10) {
+  $corner_style: 'circular';
+} @else {
+  $corner_style: 'square';
+}

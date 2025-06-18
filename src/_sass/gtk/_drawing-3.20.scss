@@ -1,0 +1,276 @@
+// generic drawing of more complex things
+
+// ripple effect animations
+
+@keyframes ripple {
+  to { background-size: 1000% 1000%; }
+}
+
+@keyframes ripple-on-slider {
+  to { background-size: auto, 1000% 1000%; }
+}
+
+@keyframes ripple-on-headerbar {
+  from {
+    background-image: radial-gradient(circle, $primary 0%, transparent 0%);
+  }
+
+  to {
+    background-image: radial-gradient(circle, $primary 100%, transparent 0%);
+  }
+}
+
+
+@mixin entry($t, $fc: $outline-checked, $b: $entry, $fg: $text) {
+//
+// entry
+//
+// $t: entry type
+// $fc: focus color
+//
+
+  @if $t == normal {
+    transition: $transition, box-shadow $ripple-fade-out-duration $ease-out;
+    box-shadow: inset 0 -3px $outline-normal;
+    background-color: $b;
+    color: rgba($fg, 0.8);
+  }
+
+  @if $t == hover {
+    background-color: $b;
+    box-shadow: inset 0 -3px $outline-hover;
+    color: $fg;
+  }
+
+  @if $t == focus {
+    background-color: $b;
+    box-shadow: inset 0 -3px $outline-focus;
+    color: $fg;
+  }
+
+  @if $t == checked {
+    background-color: $b;
+    box-shadow: inset 0 -3px if($fc == $outline-checked, $outline-checked, $fc);
+    color: $fg;
+  }
+
+  @if $t == disabled {
+    box-shadow: inset 0 -3px $outline-disabled;
+    background-color: $b;
+    color: rgba($fg, 0.35);
+  }
+}
+
+@mixin button($t, $b: $button, $fg: $text) {
+//
+// button
+//
+// $t: button type
+//
+
+  @if $t == normal {
+    transition: $transition,
+                box-shadow $ripple-fade-out-duration $ease-out;
+    outline: none;
+    box-shadow: inset 0 0 0 3px $outline-normal;
+    background-color: $b;
+    color: rgba($fg, 0.8);
+  }
+
+  @if $t == hover {
+    box-shadow: inset 0 0 0 3px $outline-hover;
+    background-color: $b;
+    color: $fg;
+  }
+
+  @if $t == focus {
+    box-shadow: inset 0 0 0 3px $outline-focus;
+    background-color: $b;
+    color: $fg;
+  }
+
+  @if $t == active {
+    box-shadow: inset 0 0 0 3px $outline-active;
+    background-color: $b;
+    color: rgba($fg, 0.35);
+  }
+
+  @if $t == disabled {
+    box-shadow: inset 0 0 0 3px $outline-disabled;
+    background-color: $b;
+    color: rgba($fg, 0.35);
+  }
+
+  @if $t == checked {
+    box-shadow: inset 0 0 0 3px $primary;
+    background-color: $b;
+    color: $primary;
+  }
+
+  @if $t == checked-hover {
+    box-shadow: inset 0 0 0 3px mix($text, $primary, 10%);
+    background-color: $b;
+    color: mix($text, $primary, 10%);
+  }
+
+  @if $t == checked-disabled {
+    box-shadow: inset 0 0 0 3px rgba($primary, 0.45);
+    background-color: $b;
+    color: rgba($primary, 0.45);
+  }
+
+  @if $t == flat-normal {
+    transition: $transition,
+                box-shadow $ripple-fade-out-duration $ease-out;
+    outline: none;
+    box-shadow: inset 0 0 0 3px transparent;
+    background-color: transparent;
+    color: rgba($fg, 0.8);
+  }
+
+  @if $t == flat-hover {
+    box-shadow: inset 0 0 0 3px $outline-hover;
+    color: $fg;
+  }
+
+  @if $t == flat-focus {
+    box-shadow: inset 0 0 0 3px $outline-focus;
+    color: $fg;
+  }
+
+  @if $t == flat-active {
+    box-shadow: inset 0 0 0 3px $outline-active;
+    color: rgba($fg, 0.35);
+  }
+
+  @if $t == flat-disabled {
+    box-shadow: none;
+    color: rgba($fg, 0.35);
+  }
+
+  @if $t == flat-checked {
+    box-shadow: inset 0 0 0 3px $primary;
+    color: $primary;
+  }
+
+  @if $t == flat-checked-disabled {
+    box-shadow: inset 0 0 0 3px rgba($primary, 0.45);
+    color: rgba($primary, 0.45);
+  }
+
+  @if $t == linked-normal {
+    box-shadow: inset 0 -3px $outline-normal;
+    background-color: $b;
+    color: rgba($fg, 0.8);
+  }
+
+  @if $t == linked-hover {
+    background-color: $b;
+    box-shadow: inset 0 -3px $outline-hover;
+    color: $fg;
+  }
+
+  @if $t == linked-focus {
+    background-color: $b;
+    box-shadow: inset 0 -3px $outline-focus;
+    color: $fg;
+  }
+
+  @if $t == linked-active {
+    background-color: $b;
+    box-shadow: inset 0 -3px $outline-active;
+    color: rgba($fg, 0.35);
+  }
+
+  @if $t == linked-checked {
+    background-color: $b;
+    box-shadow: inset 0 -3px $primary;
+    color: $primary;
+  }
+
+  @if $t == linked-checked-disabled {
+    box-shadow: inset 0 -3px rgba($primary, 0.45);
+    color: rgba($primary, 0.45);
+  }
+
+  @if $t == linked-disabled {
+    box-shadow: inset 0 -3px $outline-disabled;
+    background-color: $b;
+    color: rgba($fg, 0.35);
+  }
+}
+
+
+@mixin overshoot($p) {
+//
+// overshoot
+//
+// $p: position
+//
+// possible $p values:
+// top, bottom, right, left
+//
+
+  $_position: center $p;
+
+  @if ($p == left) or ($p == right) {
+    $_position: $p center;
+  }
+
+  background-image: -gtk-gradient(radial,
+                                  $_position, 0,
+                                  $_position, 0.75,
+                                  to($fill),
+                                  to(transparent));
+
+  background-repeat: no-repeat;
+  background-position: $_position;
+
+  background-color: transparent; // reset some properties to be sure to not inherit them somehow
+  border: none;                  //
+  box-shadow: none;              //
+}
+
+
+@mixin undershoot($p) {
+//
+// undershoot
+//
+// $p: position
+//
+// possible $p values:
+// top, bottom, right, left
+//
+
+  $_undershoot_color_dark: $track;
+  $_undershoot_color_light: transparent;
+
+  $_gradient_dir: left;
+  $_dash_bg_size: 12px 1px;
+  $_gradient_repeat: repeat-x;
+  $_bg_pos: left $p;
+
+  @if ($p == left) or ($p == right) {
+    $_gradient_dir: top;
+    $_dash_bg_size: 1px 12px;
+    $_gradient_repeat: repeat-y;
+    $_bg_pos: $p top;
+  }
+
+  background-color: transparent; // shouldn't be needed, but better to be sure
+
+  background-image: linear-gradient(to $_gradient_dir, // this is the dashed line
+                                    $_undershoot_color_light 50%,
+                                    $_undershoot_color_dark 50%);
+
+  padding-#{$p}: 1px;
+  background-size: $_dash_bg_size;
+  background-repeat: $_gradient_repeat;
+  background-origin: content-box;
+  background-position: $_bg_pos;
+  margin: 0 4px;
+
+  @if ($p == left) or ($p == right) {
+    margin: 4px 0;
+  }
+}

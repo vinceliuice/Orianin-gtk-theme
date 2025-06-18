@@ -1,0 +1,157 @@
+@import 'tweaks-temp';
+
+// Function to convert px values to em
+@function to_em($input, $base: 16px) {
+  // multiplied and divided by 1000 to make up for round() shortcoming
+  $em_value: ($input / $base) * 1.091 * 1000;
+  @return round($em_value) / 1000 * 1em;
+}
+
+$asset-suffix: if($variant == 'dark', '-dark', '');
+$theme-asset-suffix: if($topbar == 'dark', if($variant == 'dark', '-dark', ''), '-light');
+$blackness-asset-suffix: if($blackness == 'false' or $topbar == 'light', '', '-blackness');
+
+//
+// Sizes
+//
+
+$space-size: if($compact == 'false', 6px, 4px);
+$margin-size: if($compact == 'false', 4px, 2px);
+$small-size: if($compact == 'false', 24px, 22px);
+$medium-size: if($compact == 'false', 36px, 32px);
+$large-size: if($compact == 'false', 48px, 40px);
+
+$bar-size: 6px;
+$menuitem-size: if($compact == 'false', 28px, 24px);
+$base-icon-size: 16px;
+$medium-icon-size: $base-icon-size * 1.5; // 24px
+$large-icon-size: $base-icon-size * 2;
+
+// Scaled values
+// Used in elements that follow text scaling factors
+$scaled-padding: to_em(6px); // same as $base_padding
+
+// Used for symbolic icons that scale
+$scalable-icon-size: to_em(16px);
+$medium-scalable-icon-size: $scalable-icon-size * 1.5;
+$large-scalable-icon-size: $scalable-icon-size * 2;
+
+//
+// Radiuses
+//
+
+$window-radius: $default_corner + $space-size;
+$corner-radius: if($compact == 'false', $default_corner, max(0, $default_corner - 2px));
+$material-radius: $default_corner / 2 + 4px;
+$menu-radius: $default_corner / 4 + $space-size + 2px;
+$popup-radius: $default_corner + $space-size * 2 - 4px;
+$menuitem-radius: $default_corner / 4 + 2px;
+$circular-radius: 9999px;
+$panel-corner-radius: 0; // For gnome-shell
+
+// font families
+$font-family: "M+ 1c", Roboto, Cantarell, Sans-Serif;
+$large-font-family: Roboto, "M+ 1c", Cantarell, Sans-Serif;
+
+// font sizes
+$root-font-size: if($compact == 'false', 14px, 13px);
+$subheading-size: if($compact == 'false', 16px, 15px);
+
+//
+// Durations
+//
+
+$duration: 75ms;
+$shorter-duration: 100ms;
+$longer-duration: 150ms;
+$ripple-fade-in-duration: 225ms;
+$ripple-fade-out-duration: 300ms;
+$ripple-fade-out-opacity-duration: 1200ms;
+
+//
+// Timing functions
+//
+
+$ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+$ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0.0, 1, 1);
+$ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1);
+
+//
+// Transition shorthands
+//
+
+$transition: all $duration $ease-out;
+$transition-shadow: box-shadow $duration $ease-out;
+
+//
+// Shadows
+//
+
+// Values are based on:
+// https://github.com/material-components/material-components-web/blob/master/packages/mdc-elevation/_variables.scss
+
+// NOTE: box-shadow blur less than 2px doesn't work properly, see
+// https://gitlab.gnome.org/GNOME/gtk/issues/511
+
+// NOTE 2: Compared to rendering on the Web, GTK seems to have a bigger blur.
+
+$shadow-z1:
+  0 2px 2px -2px rgba(black, 0.3),
+  0 1px 2px -1px rgba(black, 0.24),
+  0 1px 2px -1px rgba(black, 0.17);
+$shadow-z2:
+  0 3px 2px -3px rgba(black, 0.3),
+  0 2px 2px -1px rgba(black, 0.24),
+  0 1px 3px 0 rgba(black, 0.12);
+$shadow-z3:
+  0 3px 3px -2px rgba(black, 0.2),
+  0 3px 3px 0 rgba(black, 0.14),
+  0 1px 5px 0 rgba(black, 0.12);
+$shadow-z4:
+  0 2px 2px -1px rgba(black, 0.2),
+  0 4px 4px 0 rgba(black, 0.14),
+  0 1px 6px 0 rgba(black, 0.12);
+$shadow-z6:
+  0 3px 3px -1px rgba(black, 0.2),
+  0 6px 6px 0 rgba(black, 0.14),
+  0 1px 11px 0 rgba(black, 0.12);
+$shadow-z8:
+  0 5px 5px -3px rgba(black, 0.2),
+  0 8px 8px 1px rgba(black, 0.14),
+  0 3px 9px 2px rgba(black, 0.12);
+$shadow-z12:
+  0 7px 7px -4px rgba(black, 0.2),
+  0 12px 12px 2px rgba(black, 0.14),
+  0 5px 13px 4px rgba(black, 0.12);
+$shadow-z16:
+  0 8px 6px -5px rgba(black, 0.2),
+  0 16px 16px 2px rgba(black, 0.14),
+  0 6px 18px 5px rgba(black, 0.12);
+$shadow-z24:
+  0 11px 11px -7px rgba(black, 0.2),
+  0 24px 24px 3px rgba(black, 0.14),
+  0 9px 28px 8px rgba(black, 0.12);
+
+$text-shadow:
+  0 1px 1px rgba(black, 0.2),
+  0 1px 2px rgba(black, 0.14),
+  0 1px 3px rgba(black, 0.12);
+
+// workaround for selection-mode checkboxes
+$icon-shadow-z2:
+  0 1px 1px rgba(black, 0.2),
+  0 2px 2px rgba(black, 0.14),
+  0 1px 3px rgba(black, 0.12);
+$icon-shadow-z4:
+  0 2px 2px rgba(black, 0.2),
+  0 4px 4px rgba(black, 0.14),
+  0 1px 6px rgba(black, 0.12);
+
+// workaround for Gnome-shell
+$shell-shadow-z1: 0 1px 2px rgba(black, 0.25);
+$shell-shadow-z2: 0 3px 3px rgba(black, 0.32);
+$shell-shadow-z3: 0 3px 8px rgba(black, 0.2);
+$shell-shadow-z4: 0 6px 10px rgba(black, 0.32);
+$shell-shadow-z5: 0 10px 15px rgba(black, 0.45);
+$shell-shadow-z6: 0 12px 20px rgba(black, 0.6);

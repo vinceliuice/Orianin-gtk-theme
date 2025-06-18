@@ -1,0 +1,189 @@
+.quick-settings {
+  padding: $space-size * 3 !important;
+  border-radius: 8px + $space-size * 5 !important;
+  margin-top: $space-size / 2 !important;
+  border: none;
+
+  .icon-button, .button {
+    padding: $space-size * 2;
+  }
+}
+
+.quick-settings-grid {
+  spacing-rows: $space-size * 2;
+  spacing-columns: $space-size * 2;
+}
+
+.quick-toggle {
+  border-radius: $circular-radius;
+  min-width: if($compact == 'false', 12em, 11em);
+  max-width: if($compact == 'false', 12em, 11em);
+  min-height: $space-size * 4 + $base-icon-size;
+  border: none;
+  background-color: rgba($text, 0.06) !important;
+
+  &:hover {
+    background-color: rgba($text, 0.12) !important;
+  }
+
+  &:active {
+    background-color: rgba($text, 0.24) !important;
+  }
+
+  &:checked {
+    background-color: $primary !important;
+    color: on($primary) !important;
+
+    &:hover {
+      background-color: mix($text, $primary, 10%) !important;
+      color: on($primary) !important;
+    }
+
+    &:active {
+      background-color: mix($text, $primary, 20%) !important;
+      color: on($primary) !important;
+    }
+  }
+
+  & > StBoxLayout { spacing: $space-size; }
+
+  /* Move padding into the box; this is to allow menu arrows
+     to extend to the border */
+  &.button { padding: 0; }
+  & > StBoxLayout { padding: 0 $space-size * 2; }
+  &:ltr > StBoxLayout { padding-left: $space-size * 2.5; }
+  &:rtl > StBoxLayout { padding-right: $space-size * 2.5; }
+
+  .quick-toggle-label { font-weight: bold; }
+  .quick-toggle-icon, .quick-toggle-arrow { icon-size: $base-icon-size; }
+}
+
+.quick-menu-toggle {
+  &:ltr > StBoxLayout { padding-right: 0; }
+  &:rtl > StBoxLayout { padding-left: 0; }
+
+  .quick-toggle-arrow {
+    background-color: $secondary-fill !important;
+    padding: $space-size $space-size * 1.75;
+
+    &:active {
+      background-color: $track !important;
+    }
+
+    &:ltr { border-radius: 0 $circular-radius $circular-radius 0; }
+    &:rtl { border-radius: $circular-radius 0 0 $circular-radius; }
+  }
+}
+
+.quick-slider {
+  padding: 0 $space-size;
+
+  > StBoxLayout { spacing: $space-size; }
+
+  .slider-bin {
+    &:focus { @include button(focus); }
+    min-height: $base-icon-size; // slider size
+    padding: $space-size;
+    border-radius: $circular-radius;
+  }
+
+  .quick-toggle-icon {
+    icon-size: $base-icon-size;
+  }
+}
+
+.quick-toggle-menu {
+  border-radius: $space-size * 5 !important;
+  padding: $space-size * 2;
+  margin: $space-size * 2 $space-size * 3.5 0;
+    background-color: $surface !important;
+    color: $text-secondary !important;
+
+  .popup-menu-item {
+    padding: $space-size + 2px !important;
+    border-radius: $circular-radius !important;
+      color: $text-secondary !important;
+
+      &:focus, &:hover, &.selected {
+        color: $text !important;
+        background-color: $secondary-fill !important;
+      }
+
+      &:active {
+        color: $text !important;
+        background-color: $divider !important;
+      }
+
+      &:insensitive {
+        color: $text-secondary-disabled !important;
+      }
+
+    > StIcon { -st-icon-style: symbolic; }
+
+    & > :first-child {
+      &:ltr {
+        padding-left: $space-size  + $margin-size !important;
+      }
+
+      &:rtl {
+        padding-right: $space-size + $margin-size !important;
+      }
+    }
+
+    .popup-separator-menu-item-separator {
+      margin: $space-size $space-size * 3 $space-size 0 !important;
+        background-color: $border !important;
+    }
+
+    @if $variant == 'dark' {
+      .toggle-switch {
+        background-image: url("assets/menu-toggle-off.svg");
+      }
+    }
+  }
+
+  & .header {
+    spacing-rows: 0.5 * $space-size;
+    spacing-columns: $space-size * 2;
+    padding-bottom: 2 * $space-size;
+
+    & .icon {
+      icon-size: 24px; // a non-standard symbolic size but ok
+      border-radius: $circular-radius;
+      padding: 1.5 * $space-size;
+      background-color: rgba(black, 0.08) !important;
+
+      &.active {
+        background-color: $primary !important;
+        color: on($primary) !important;
+      }
+    }
+  }
+}
+
+.quick-settings-system-item {
+  & > StBoxLayout { spacing: 2 * $space-size; }
+
+  .icon-button {
+    background-color: rgba($text, 0.06);
+
+    &:hover { background-color: rgba($text, 0.12); }
+    &:active { background-color: rgba($text, 0.24); }
+
+    > StIcon { -st-icon-style: symbolic; }
+  }
+
+  & .power-item {
+    min-height: 0;
+    min-width: 0;
+
+    &:insensitive {
+      @include button(normal);
+      background-color: transparent;
+    }
+  }
+}
+
+.nm-network-item {
+  .wireless-secure-icon { icon-size: 8px; }
+}
