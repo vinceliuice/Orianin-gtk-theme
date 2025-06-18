@@ -2,7 +2,7 @@
 
 Orianin is a flat design theme for GNOME/GTK based desktop environments.
 
-![screenshot](images/screenshot.jpeg?raw=true)
+![screenshot](screenshot.jpeg?raw=true)
 
 ## Requirements
 
