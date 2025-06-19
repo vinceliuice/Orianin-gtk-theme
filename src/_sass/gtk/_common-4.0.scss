@@ -609,7 +609,7 @@ button {
       &:disabled { @include button(flat-disabled); }
     }
 
-    &:checked, &:checked:hover { @include button(flat-checked); }
+    &:checked { @include button(flat-checked); }
 
     &:checked:disabled { @include button(flat-checked-disabled); }
   }
