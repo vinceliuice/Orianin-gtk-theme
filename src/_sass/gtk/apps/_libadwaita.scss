@@ -1013,8 +1013,14 @@ $sidebar-backdrop: if($variant == 'light' and $topbar == 'dark', $titlebar-backd
       &:backdrop { color: $text-disabled; }
     }
 
-    button:not(.suggested-action):not(.destructive-action) {
-      @extend %titlebar-button-reset;
+    @if $mac_style == 'true' {
+      button:not(.suggested-action):not(.destructive-action):not(.close):not(.maximize):not(.minimize) {
+        @extend %titlebar-button-reset;
+      }
+    } @else {
+      button:not(.suggested-action):not(.destructive-action) {
+        @extend %titlebar-button-reset;
+      }
     }
 
     stackswitcher { // reset

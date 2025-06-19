@@ -1543,16 +1543,14 @@ headerbar {
     color: transparent;
 
     &:hover {
+      color: white;
       box-shadow: none;
     }
 
     &:active {
+      color: white;
       box-shadow: inset 0 0 0 9999px rgba(black, if($topbar == 'dark', 0.12, 0));
       background-image: radial-gradient(circle, rgba(black, 0.12) 10%, transparent 0%);
-    }
-
-    &:hover, &:active {
-      color: white;
     }
 
     &:backdrop {
@@ -1566,7 +1564,9 @@ headerbar {
   }
 
   &.minimize { // Window minimize button
-    background-color: $titlebutton-min;
+    &, &:hover, &:focus {
+      background-color: $titlebutton-min;
+    }
 
     &:active {
       background-color: mix($titlebar-text, $titlebutton-min, 25%);
@@ -1574,7 +1574,9 @@ headerbar {
   }
 
   &.maximize { // Window maximize button
-    background-color: $titlebutton-max;
+    &, &:hover, &:focus {
+      background-color: $titlebutton-max;
+    }
 
     &:active {
       background-color: mix($titlebar-text, $titlebutton-max, 25%);
@@ -1582,7 +1584,9 @@ headerbar {
   }
 
   &.close { // Window close button
-    background-color: $titlebutton-close;
+    &, &:hover, &:focus {
+      background-color: $titlebutton-close;
+    }
 
     &:active {
       background-color: mix($titlebar-text, $titlebutton-close, 25%);
@@ -1638,7 +1642,7 @@ headerbar {
     }
   }
 
-  button.titlebutton {
+  button.titlebutton:not(.suggested-action):not(.destructive-action) {
     @extend %circular-button;
 
     @if $mac_style == 'true' {
@@ -1646,20 +1650,20 @@ headerbar {
     }
   }
 
-  @if $mac_style == 'true' {
-    .background.csd &.titlebar.default-decoration {
-      button.titlebutton {
-        @extend %firefox_window_button;
-      }
-    }
+  // @if $mac_style == 'true' {
+  //   .background.csd &.titlebar.default-decoration {
+  //     button.titlebutton {
+  //       @extend %firefox_window_button;
+  //     }
+  //   }
 
-    .background.csd.maximized &.titlebar.default-decoration button.titlebutton.maximize {
-      &:hover, &:active {
-        background-image: -gtk-scaled(url("assets/unmaximize-symbolic.svg"),
-                                      url("assets/unmaximize-symbolic@2.svg"))
-      }
-    }
-  }
+  //   .background.csd.maximized &.titlebar.default-decoration button.titlebutton.maximize {
+  //     &:hover, &:active {
+  //       background-image: -gtk-scaled(url("assets/unmaximize-symbolic.svg"),
+  //                                     url("assets/unmaximize-symbolic@2.svg"))
+  //     }
+  //   }
+  // }
 }
 
 
