@@ -5,3 +5,12 @@
 src/cinnamon/*.css
 src/gnome-shell/*/*.css
 src/gtk/*/*.css
+release/Orianin-Green.tar.xz
+release/Orianin-Grey.tar.xz
+release/Orianin-Orange.tar.xz
+release/Orianin-Pink.tar.xz
+release/Orianin-Purple.tar.xz
+release/Orianin-Red.tar.xz
+release/Orianin-Teal.tar.xz
+release/Orianin-Yellow.tar.xz
+release/Orianin.tar.xz
