@@ -2180,43 +2180,37 @@ magnifier {
   min-height: $small-size;
   min-width: $small-size;
   padding: $space-size $space-size * 2;
-  border-width: 1px;
-  border-color: transparent;
-  border-style: solid;
+  border: none;
   outline: none;
   background-clip: padding-box;
-  box-shadow: none;
   color: $text-secondary;
-  font-weight: 500;
+  background-color: transparent;
+  font-weight: bold;
 
   &:hover {
-    background-color: $solid-border;
+    background-color: transparent;
     color: $text;
   }
 
-  &:disabled { color: $text-secondary-disabled; }
+  &:disabled {
+    color: $text-secondary-disabled;
+  }
 
   &:checked {
-    transition: $transition;
-    background-color: $base;
-    background-clip: padding-box;
-    border-color: $solid-border;
     color: $text;
-    box-shadow: none;
+    background-color: transparent;
 
-    &:disabled { color: $text-disabled; }
-
-    &.reorderable-page {
-      background-color: $base;
+    &:disabled {
+      color: $text-disabled;
     }
   }
 }
 
 notebook {
-  background-color: $base;
+  background-color: transparent;
 
   frame > paned > & > header,
-  &.frame > header { background-color: $base-alt; }
+  &.frame > header { background-color: transparent; }
 
   &.frame {
     border-radius: $corner-radius;
@@ -2255,57 +2249,30 @@ notebook {
 
   > header {
     border: none;
-    background-color: $background;
-    padding: 0;
+    background-color: transparent;
+    background-clip: padding-box;
 
-    &.top {
-      box-shadow: inset 0 -1px $solid-border;
+    @each $_pos, $_bpos, $_bsize, $_fsize in (top, bottom, 0 -3px, 0 -1px),
+                                             (bottom, top, 0 3px, 0 1px),
+                                             (right, left, 3px 0, 1px 0),
+                                             (left, right, -3px 0, -1px 0) {
+      &.#{$_pos} {
+        // box-shadow: inset $_fsize $border;
+  
+        > tabs > tab {
+          box-shadow: inset $_bsize transparent;
 
-      > tabs {
-        margin: 4px 0 0;
-
-        > tab {
-          border-radius: $corner-radius $corner-radius 0 0;
-          border-bottom: none;
-        }
-      }
-    }
-
-    &.bottom {
-      box-shadow: inset 0 1px $solid-border;
-
-      > tabs {
-        margin: 0 0 4px;
-
-        > tab {
-          border-radius: 0 0 $corner-radius $corner-radius;
-          border-top: none;
-        }
-      }
-    }
-
-    &.left {
-      box-shadow: inset -1px 0 $solid-border;
-
-      > tabs {
-        margin: 0 0 0 4px;
-
-        > tab {
-          border-radius: $corner-radius 0 0 $corner-radius;
-          border-right: none;
-        }
-      }
-    }
-
-    &.right {
-      box-shadow: inset 1px 0 $solid-border;
-
-      > tabs {
-        margin: 0 4px 0 0;
-
-        > tab {
-          border-radius: 0 $corner-radius $corner-radius 0;
-          border-left: none;
+          &:hover {
+            box-shadow: inset $_bsize $text-disabled;
+          }
+  
+          &:active {
+            box-shadow: inset $_bsize $text-secondary;
+          }
+  
+          &:checked {
+            box-shadow: inset $_bsize $primary;
+          }
         }
       }
     }
@@ -3827,6 +3794,13 @@ list.boxed-list {
         border-bottom: none;
       }
     }
+  }
+}
+
+list.boxed-list {
+  label.cc-placeholder-row {
+    background-color: $overlay-normal;
+    border-radius: $corner-radius;
   }
 }
 
