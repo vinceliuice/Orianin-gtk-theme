@@ -1,14 +1,13 @@
-
 //
 // Nautilus
 //
 .nautilus-window {
   &.background.csd {
-    color: if($topbar == 'dark' and $variant == 'light', $titlebar-text-secondary, $text-secondary);
+    color: if($topbar =='dark' and $variant =='light', $titlebar-text-secondary, $text-secondary);
 
     &, &:backdrop {
       background-image: none;
-      background-color: if($topbar == 'dark' and $variant == 'light', $titlebar, $base);
+      background-color: if($topbar =='dark' and $variant =='light', $titlebar, $base);
     }
   }
 
@@ -18,20 +17,25 @@
     }
   }
 
-  @if $variant == 'light' and $topbar == 'dark' {
+  @if $variant =='light' and $topbar =='dark' {
+
     .sidebar-pane,
     .content-pane {
       headerbar {
         color: $titlebar-text;
-  
+
         .subtitle,
         .dim-label {
           color: $titlebar-text-secondary;
-      
-          &:backdrop { color: $titlebar-text-disabled; }
+
+          &:backdrop {
+            color: $titlebar-text-disabled;
+          }
         }
 
-        popover.background { // reset
+        popover.background {
+
+          // reset
           > contents {
             background-color: $surface;
             color: $text;
@@ -39,13 +43,15 @@
             .dim-label {
               color: $text-secondary;
 
-              &:backdrop { color: $text-disabled; }
+              &:backdrop {
+                color: $text-disabled;
+              }
             }
           }
 
           > contents > grid stack > scrolledwindow {
             border: 1px solid $border;
-  
+
             row + separator {
               background-color: transparent;
             }
@@ -53,7 +59,7 @@
         }
       }
     }
-  
+
     .content-pane {
       &, &:backdrop {
         background-color: transparent;
@@ -85,7 +91,9 @@
   }
 
   .sidebar-pane {
-    &, &:backdrop { background-color: transparent; }
+    &, &:backdrop {
+      background-color: transparent;
+    }
 
     &:dir(ltr), &.end:dir(rtl) {
       &, banner > revealer > widget {
@@ -104,18 +112,23 @@
 
   flap.unfolded > placessidebar,
   .sidebar-pane > toolbarview > placessidebar {
-    background-color: if($topbar == 'dark' and $variant == 'light', $titlebar, $base);
+    background-color: if($topbar =='dark' and $variant =='light', $titlebar, $base);
     border-radius: $window-radius;
     color: $titlebar-text-secondary;
 
     > scrolledwindow {
       margin: 0 0 $space-size * 2 $space-size * 2;
       border-radius: $window-radius - $space-size;
-      background-color: if($topbar == 'dark' and $variant == 'light', transparent, rgba($primary, 0.08));
+      background-color: if($topbar =='dark' and $variant =='light', transparent, rgba($primary, 0.08));
 
       > overshoot, > undershoot {
-        &.top { border-radius: $window-radius - $space-size $window-radius - $space-size 0 0; }
-        &.bottom { border-radius: 0 0 $window-radius - $space-size $window-radius - $space-size; }
+        &.top {
+          border-radius: $window-radius - $space-size $window-radius - $space-size 0 0;
+        }
+
+        &.bottom {
+          border-radius: 0 0 $window-radius - $space-size $window-radius - $space-size;
+        }
       }
 
       > viewport {
@@ -127,11 +140,15 @@
               background-color: $primary;
               color: on($primary);
 
-              image.sidebar-icon { color: on($primary); }
+              image.sidebar-icon {
+                color: on($primary);
+              }
             }
           }
 
-          > separator { background: none; }
+          > separator {
+            background: none;
+          }
         }
       }
 
@@ -155,27 +172,31 @@
     .box {
       padding: 0 $window-radius - $space-size;
       background-color: transparent;
-      box-shadow: inset 0 -1px if($topbar == 'dark' and $variant == 'light', transparent, $solid-border);
+      box-shadow: inset 0 -1px if($topbar =='dark' and $variant =='light', transparent, $solid-border);
     }
 
     tab {
       color: $titlebar-text-secondary;
 
-      @if $topbar == 'dark' and $variant == 'light' {
+      @if $topbar =='dark' and $variant =='light' {
         border: none;
       }
 
       &:hover:not(:selected):not(:active):not(:checked) {
         color: $titlebar-text;
-        background-color: if($topbar == 'dark', rgba($titlebar-text, 0.05), transparent);
+        background-color: if($topbar =='dark', rgba($titlebar-text, 0.05), transparent);
       }
 
       &:active, &:checked, &:selected {
         color: $text;
 
-        &:disabled { color: $text-disabled; }
+        &:disabled {
+          color: $text-disabled;
+        }
 
-        & > button.flat { @extend %button-flat-simple; }
+        & > button.flat {
+          @extend %button-flat-simple;
+        }
       }
 
       &:disabled {
@@ -183,16 +204,18 @@
       }
 
       & > button.flat {
-        @if $topbar == 'dark' {
+        @if $topbar =='dark' {
           @extend %button-on-dark;
-        } @else {
+        }
+
+        @else {
           @extend %button-flat-simple;
         }
       }
     }
   }
 
-  @if $variant == 'light' and $topbar == 'dark' {
+  @if $variant =='light' and $topbar =='dark' {
     tabview stack {
       background-color: transparent;
 
@@ -229,7 +252,9 @@
       border-radius: $window-radius - $space-size;
       margin: 0 $space-size $space-size 0;
 
-      .view { background-color: transparent; }
+      .view {
+        background-color: transparent;
+      }
     }
 
     placesview {
@@ -270,7 +295,7 @@
 .floating-bar {
   min-height: $menuitem-size;
   padding: $space-size / 2;
-  margin: if($variant == 'light' and $topbar == 'dark', $space-size * 2, $space-size);
+  margin: if($variant =='light' and $topbar =='dark', $space-size * 2, $space-size);
   border: none;
   border-radius: $circular-radius;
   background-color: $base-alt;
@@ -285,29 +310,32 @@
 }
 
 #NautilusViewCell {
+  padding: 0;
+
   clamp box {
     margin: 0;
     border-spacing: 0;
   }
 }
 
-#NautilusQueryEditor { // search entry
+#NautilusQueryEditor {
+  // search entry
   padding: 0 ($medium-size - $menuitem-size) / 2 0 ($space-size + 2px);
 
   > menubutton > button.image-button {
     min-width: $menuitem-size;
     min-height: $menuitem-size;
-    margin: ($medium-size - $menuitem-size) / 2 0;
     padding: 0;
   }
 
-  > text { margin: 0; }
+  > * {
+    margin: ($medium-size - $menuitem-size) / 2 0;
+  }
 }
 
 #NautilusPathBar {
   background-color: $titlebar-fill;
   border-radius: $circular-radius;
-  margin: $space-size 0;
 
   #NautilusPathButton {
     margin: 0 $space-size / 2;
@@ -322,7 +350,9 @@
       }
     }
 
-    &:first-child { margin-left: 0; }
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   > menubutton > button {
@@ -334,10 +364,10 @@
   border-radius: $circular-radius;
 
   > button {
-   margin: $space-size / 2;
-   padding: 0;
-   min-height: $small-size - 2px;
-   min-width: $small-size - 2px;
+    margin: $space-size / 2;
+    padding: 0;
+    min-height: $small-size - 2px;
+    min-width: $small-size - 2px;
   }
 }
 
@@ -364,6 +394,7 @@ window > contents {
     }
 
     &.unfolded {
+
       stack.background leaflet box:last-child > headerbar,
       stack.background leaflet + headerbar {
         border-top-left-radius: 0;
@@ -390,12 +421,15 @@ window > widget {
 
     &.unfolded {
       stack.background > widget > overlay > leaflet > box > headerbar, // Control display header
+
       stack.background > widget > box > widget > headerbar,
-      > box:not(:last-child) headerbar { // Calendar and Builder right header
+      > box:not(:last-child) headerbar {
+        // Calendar and Builder right header
         border-top-left-radius: 0;
       }
 
-      > separator + box > headerbar { // Calendar and control left header
+      > separator + box > headerbar {
+        // Calendar and control left header
         border-top-right-radius: 0;
       }
     }
@@ -545,7 +579,9 @@ window > contents leaflet {
 // Calculator
 //
 
-.history-view { background-color: $base; }
+.history-view {
+  background-color: $base;
+}
 
 #displayitem {
   border-top: 1px solid $border;
@@ -735,20 +771,24 @@ button:checked:not(:backdrop) .calendar-color-image,
 datechooser {
   padding: $space-size;
 
-  .current-week { // Month selector
+  .current-week {
+    // Month selector
     background-color: $fill;
     color: $text;
     border-radius: $corner-radius;
   }
 
-  navigator { // add some space between the two controls
+  navigator {
+    // add some space between the two controls
     margin-right: $space-size;
     margin-left: $space-size;
     margin-bottom: $space-size;
   }
 
   navigator {
-    label { font-weight: bold; }
+    label {
+      font-weight: bold;
+    }
 
     button, button.popup, button.image-button {
       min-height: $medium-size;
@@ -764,7 +804,8 @@ datechooser {
   }
 
   .sidebar-pane & {
-    .current-week { // Month selector
+    .current-week {
+      // Month selector
       background-color: $titlebar-fill;
       color: $titlebar-text;
     }
@@ -796,21 +837,28 @@ datechooser {
       color: on($primary);
       font-weight: bold;
 
-      dot { background-color: on($primary); }
+      dot {
+        background-color: on($primary);
+      }
     }
 
     &.today {
       color: $primary;
 
-      dot { background-color: $primary; }
+      dot {
+        background-color: $primary;
+      }
     }
 
     &.other-month {
+
       &:not(:hover),
       &:backdrop {
         color: gtkalpha(currentColor, 0.1);
 
-        dot { background-color: gtkalpha(currentColor, 0.1); }
+        dot {
+          background-color: gtkalpha(currentColor, 0.1);
+        }
       }
     }
   }
@@ -884,10 +932,14 @@ monthcell {
       background-color: gtkalpha($primary, 0.2);
     }
 
-    label.day-label { font-weight: bold; }
+    label.day-label {
+      font-weight: bold;
+    }
   }
 
-  &:nth-child(7n + 1) { border-left-width: 0; }
+  &:nth-child(7n + 1) {
+    border-left-width: 0;
+  }
 
   &.today {
     background-color: gtkalpha($primary, 0.2);
@@ -975,7 +1027,7 @@ menubutton {
     border-radius: 0;
     border-top-style: none;
     border-bottom-style: none;
-    
+
     &:hover:not(:backdrop) {
       background-image: none;
       text-shadow: none;
@@ -1181,24 +1233,25 @@ screenshot-carousel box.frame.view {
 }
 
 .category-tile.category-work {
-  padding: 1px; /* FIXME: work around https://gitlab.gnome.org/GNOME/gtk/-/issues/4324 */
+  padding: 1px;
+  /* FIXME: work around https://gitlab.gnome.org/GNOME/gtk/-/issues/4324 */
   color: #1c71d8;
-  background-color:#fdf8d7;
+  background-color: #fdf8d7;
   background-image: linear-gradient($border 1px, transparent 1px),
-           linear-gradient(90deg, $border 1px, transparent 1px);
+    linear-gradient(90deg, $border 1px, transparent 1px);
   background-size: 10px 10px, 10px 10px;
   background-position: -1px -4px, center -1px;
 
   &:hover {
     background-color: lighten(#fdf8d7, 5%);
     background-image: linear-gradient($border 1px, transparent 1px),
-             linear-gradient(90deg, $border 1px, transparent 1px);
+      linear-gradient(90deg, $border 1px, transparent 1px);
   }
 
   &:active {
     background-color: darken(#fdf8d7, 5%);
     background-image: linear-gradient($border 1px, transparent 1px),
-             linear-gradient(90deg, $border 1px, transparent 1px);
+      linear-gradient(90deg, $border 1px, transparent 1px);
   }
 }
 
@@ -1348,6 +1401,7 @@ image.circular {
   }
 
   popover.background {
+
     > arrow,
     > contents {
       padding: 0;
@@ -1373,8 +1427,11 @@ window.org-gnome-Builder {
 }
 
 popover.background.global-search {
+
   > arrow,
-  > contents { padding: 0; }
+  > contents {
+    padding: 0;
+  }
 }
 
 panelframeswitcher {
@@ -1440,7 +1497,9 @@ panelstatusbar {
   background-color: $background;
 
   > menubutton > button,
-  > paneltogglebutton button.image-button { border-radius: 0; }
+  > paneltogglebutton button.image-button {
+    border-radius: 0;
+  }
 }
 
 // Setting window
@@ -1491,7 +1550,9 @@ window.dialog {
       border-radius: 0;
 
       > row {
-        &:first-child, &:last-child { border-radius: 0; }
+        &:first-child, &:last-child {
+          border-radius: 0;
+        }
       }
     }
   }
@@ -1520,23 +1581,23 @@ button.colorpad {
   margin: 0px;
   background-blend-mode: screen;
   background-image:
-      linear-gradient(45deg, #0f0f0f55 25%, transparent 25%, transparent 75%, #0f0f0f55 75%, #0f0f0f55),
-      linear-gradient(45deg, #0f0f0f55 25%, transparent 25%, transparent 75%, #0f0f0f55 75%, #0f0f0f55);
+    linear-gradient(45deg, #0f0f0f55 25%, transparent 25%, transparent 75%, #0f0f0f55 75%, #0f0f0f55),
+    linear-gradient(45deg, #0f0f0f55 25%, transparent 25%, transparent 75%, #0f0f0f55 75%, #0f0f0f55);
   background-color: gtkcolor(colorpad_color);
-  color:  gtkcolor(colorpad_fg_color);
+  color: gtkcolor(colorpad_fg_color);
   background-size: 18px 18px;
   background-position: 0px 0px, 9px 9px;
 
   &:hover {
-      filter: brightness(93%);
+    filter: brightness(93%);
   }
 
   &:active {
-      filter: brightness(86%);
+    filter: brightness(86%);
   }
 
   &:checked {
-      filter: brightness(100%);
+    filter: brightness(100%);
   }
 }
 

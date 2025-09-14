@@ -1389,27 +1389,6 @@ headerbar {
     }
   }
 
-  // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
-  entry,
-  spinbutton,
-  button,
-  stackswitcher,
-  menubutton,
-  splitbutton {
-    margin-top: $space-size;
-    margin-bottom: $space-size;
-  }
-
-  menubutton > button,
-  spinbutton > button,
-  splitbutton > button,
-  splitbutton > menubutton,
-  .linked > menubutton,
-  entry > menubutton {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
   popover.background { // reset
     color: $text;
 
@@ -1432,19 +1411,8 @@ headerbar {
 
     entry { @extend %titlebar-entry-reset; }
 
-    entry,
-    spinbutton,
-    button,
-    stackswitcher,
-    menubutton,
-    splitbutton {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
     .linked:not(.vertical) > button:not(.suggested-action):not(.destructive-action) {
       border-radius: 0;
-      margin: 0;
       @extend %button-normal;
 
       &:first-child { border-radius: $menuitem-radius 0 0 $menuitem-radius; }
@@ -1454,7 +1422,6 @@ headerbar {
   }
 
   stackswitcher { // reset
-    margin: $space-size 0;
     border-radius: $circular-radius;
     background-color: $titlebar;
 
@@ -1499,7 +1466,7 @@ headerbar {
   }
 
   > windowhandle > box {
-    padding: 0 $space-size;
+    padding: $space-size;
 
     &,
     > box.start,
@@ -1520,10 +1487,10 @@ headerbar {
     }
   }
 
-  switch {
-    margin-top: ($large-size - 24px) / 2;
-    margin-bottom: ($large-size - 24px) / 2;
-  }
+  // switch {
+  //   margin-top: ($large-size - 24px) / 2;
+  //   margin-bottom: ($large-size - 24px) / 2;
+  // }
 
   &.selection-mode {
     // 0.1ms was a workaround for https://gitlab.gnome.org/GNOME/gtk/issues/698
