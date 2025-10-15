@@ -268,6 +268,44 @@
     }
   }
 
+  .nautilus-list-view {
+    .view {
+      background-color: transparent;
+
+      &:selected {
+        @extend %selected_items_color;
+      }
+    }
+
+    listview.view {
+      padding: 0;
+      margin: 0;
+      border-spacing: $space-size / 2;
+
+      > row.activatable {
+        padding: 0;
+        margin: 0;
+        border-radius: $menuitem-radius;
+
+        &:selected, &:selected:focus {
+          @extend %selected_items_color;
+        }
+
+        > cell {
+          padding: 0;
+
+          > widget#NautilusViewCell {
+            padding: 2px $space-size * 1.5;
+          }
+        }
+
+        &:nth-child(odd):not(:hover):not(:active):not(:selected):not(:disabled) {
+          background-image: image(rgba($text, 0.03));
+        }
+      }
+    }
+  }
+
   placesview {
     label {
       color: $text-secondary;
@@ -309,12 +347,27 @@
   }
 }
 
-#NautilusViewCell {
-  padding: 0;
+.nautilus-grid-view {
+  child.activatable {
+    padding: 0;
 
-  clamp box {
-    margin: 0;
-    border-spacing: 0;
+    #NautilusViewCell {
+      padding: 0;
+
+      clamp box {
+        margin: 0;
+        border-spacing: 0;
+      }
+
+      .icon-ui-labels-box {
+        margin: 0 0 $space-size * 2;
+        border-spacing: 0;
+      }
+
+      .dim-label {
+        border-spacing: 0;
+      }
+    }
   }
 }
 
@@ -326,10 +379,11 @@
     min-width: $menuitem-size;
     min-height: $menuitem-size;
     padding: 0;
+    margin: ($medium-size - $menuitem-size) / 2 0;
   }
 
   > * {
-    margin: ($medium-size - $menuitem-size) / 2 0;
+    margin: 0;
   }
 }
 

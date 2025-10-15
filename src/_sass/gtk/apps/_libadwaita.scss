@@ -1022,7 +1022,6 @@ $sidebar-backdrop: if($variant == 'light' and $topbar == 'dark', $titlebar-backd
     }
 
     stackswitcher { // reset
-      margin: $space-size 0;
       border-radius: $circular-radius;
 
       &.linked:not(.vertical) > button:not(.suggested-action):not(.destructive-action).text-button {
